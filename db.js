@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
+require("dotenv").config();
 
 //Define the MongoDb connection url
-const mongoUrl = "mongodb://localhost:27017/userDB";
+const mongoUrl = process.env.MONGODB_URL;
 
 //set up MongoDB connection
 mongoose.connect(mongoUrl, {
@@ -20,7 +21,7 @@ db.on("connected", () => {
 
 db.on("error", () => {
   //pre defined callback function when the connection fails
-  console.error("MongoDb connection failed", err);
+  console.error("MongoDb connection failed");
 });
 
 db.on("disconnected", () => {
