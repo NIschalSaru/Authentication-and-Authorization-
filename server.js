@@ -26,12 +26,13 @@ app.use(logRequest); // it will run before any route middleware
 
 app.use(passport.initialize());
 
-const localAuthorization = passport.authenticate("local", { session: false });
+const localAuthorization = passport.authenticate("local", { session: false }); //this is middleware where we need to authenticate user by login credientials everytime when user tries to access any route under /user or /menu
+
 app.get("/", function (req, res) {
   res.send("Hello World");
 });
 
-app.use("/user", localAuthorization, userRoutes);
+app.use("/user", userRoutes);
 app.use("/menu", localAuthorization, menuRoutes);
 
 app.listen(PORT, () => {
